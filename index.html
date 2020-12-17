@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- import JavaScript -->
+
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="//unpkg.com/element-ui"></script>
+    <script src="//unpkg.com/element-ui/lib/umd/locale/ru-RU.js"></script>
+
+    
+    <link rel="stylesheet" href="css/style.css">
+    <title>Hello, world!</title>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="row" id="app">
+            <div class="col-md-6 col-12">
+                <h1 class="title">Калькулятор неустойки</h1>
+                <div class="property">Работаем без предоплаты и даём гарантию 100% по договору</div>
+                <div class="property">Ваши данные защищены Политикой конфиденциальности</div>
+            </div>
+            <div class="col-md-6 col-12">
+                <form method="post" @submit.prevent="onSubmit">
+                    <div class="row mt-4">
+                        <div class="col-md-12">
+                            <div class="input-desc">Стоимость вашего объекта</div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">₽</span>
+                                </div>
+                                <input type="text" class="form-control" id="m__input" v-model.trim="price" min="0" aria-label="Amount (to the nearest dollar)">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 no-gutters">
+                            <div class="row">
+                                <div class="col-md-6 col-12">
+                                    <!-- <div class="input-desc">Дата сдачи (по договору)</div>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" v-model="date_from" />
+                                    </div> -->
+                                    <div class="block">
+                                        <span class="demonstration">Дата сдачи (по договору)</span>
+                                        <el-date-picker
+                                          v-model="date_from"
+                                          type="date"
+                                          placeholder="Выберите дату">
+                                        </el-date-picker>
+                                      </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <!-- <div class="input-desc">Дата сдачи (фактическая)</div>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" v-model="date_to"/>
+                                    </div> -->
+                                    <div class="block">
+                                        <span class="demonstration">Дата сдачи (фактическая)</span>
+                                        <el-date-picker
+                                          v-model="date_to"
+                                          type="date"
+                                          placeholder="Выберите дату"
+                                          :picker-options="pickerOptions">
+                                        </el-date-picker>
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- <div class="col-md-4">
+                <div id="result__block"><span> р.</span></div>
+            </div> -->
+
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 col-12 my-2">
+                        <div class="digit"><span class="number">{{ Math.round(price * date).toLocaleString() }}</span><span class="rub"> руб.</span></div>
+                        <div class="digit-desc">Неустойка с застройщика</div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-12 my-2">
+                        <div class="digit"><span class="number">{{ moral.toLocaleString() }}</span><span class="rub"> руб.</span></div>
+                        <div class="digit-desc">Моральный вред</div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-12 my-2">
+                        <div class="digit"><span class="number">{{ Math.round(fine).toLocaleString() }}</span><span class="rub"> руб.</span></div>
+                        <div class="digit-desc">Штраф 50%</div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-12 my-2">
+                        <div class="digit total"><span class="number">{{ Math.round(total).toLocaleString() }}</span><span class="rub"> руб.</span></div>
+                        <div class="digit-desc">Итого к взысканию</div>
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+</div>
+
+<script>
+  ELEMENT.locale(ELEMENT.lang.ru)
+</script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- <script src="js/vue.js"></script> -->
+    <script src="js/scripts.js"></script>
+</body>
+
+</html>
